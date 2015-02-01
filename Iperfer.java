@@ -17,7 +17,6 @@ public class Iperfer {
   	client = args[0].equals("-c"); //Iperfer as Client
 	server = args[0].equals("-s"); //Iperfer as Server
 	cmdline[0] = args[0];
-	//if(client) System.out.println("Success ");
 	if(client && argslength != 7) {
 	    System.out.println("Error: missing additional arguments");
 	    System.exit(0);
@@ -74,19 +73,22 @@ class IperferServer {
 					  true); 
 	BufferedReader in = new BufferedReader (
 						new InputStreamReader( clientSocket.getInputStream())); 
-	String inputLine; 
-	while ((inputLine = in.readLine()) != null) { 
+	String inputLine;
+	String[] buf;
+	buf = new String[1000];
+	int k = 0;
+	while((inputLine = in.readLine()) != null) { 
+	    buf[k++] = inputLine;
 	    System.out.println ("Server: " + inputLine); 
 	    out.println(inputLine); 
 	    if (inputLine.equals("Bye.")) 
 		break; 
-	} 
+	}
+	System.out.println("length of received stream: " + buf.length); 
 	out.close(); 
 	in.close(); 
 	clientSocket.close(); 
 	serverSocket.close(); 
-   
-
     }
 }
 
@@ -95,14 +97,17 @@ class IperferServer {
 class IperferClient {
     public void iperferClient(String serverHostname, int serverPort) throws IOException {
 	//String serverHostname = new String ("127.0.0.1");
-
+	char[] data;
+	data = new char[1000];
+	int i;
+	for(i=0;i<1000;i++) { data[i] = '0'; }
         System.out.println ("Attemping to connect to host " +
 			    serverHostname + " on port"+ serverPort);
-	
+ 		
         Socket echoSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-
+	
         try {
             // echoSocket = new Socket("taranis", 7);
             echoSocket = new Socket(serverHostname, serverPort);
@@ -122,13 +127,12 @@ class IperferClient {
 						  new InputStreamReader(System.in));
 	String userInput;
 	
-        System.out.print ("input: ");
-	while ((userInput = stdIn.readLine()) != null) {
-	    out.println(userInput);
-	    System.out.println("echo: " + in.readLine());
-            System.out.print ("input: ");
-	}
-
+	out.println(data);
+	// System.out.print ("input: ");
+	//while ((userInput = stdIn.readLine()) != null) {
+	//  System.out.println("echo: " + in.readLine());
+	//System.out.print ("input: ");
+	
 	out.close();
 	in.close();
 	stdIn.close();
