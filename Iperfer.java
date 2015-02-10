@@ -14,7 +14,6 @@ public class Iperfer {
 	    System.out.println("Error: missing additional arguments");
 	    System.exit(0);
 	}
-	//System.out.println("largs[0] = "+ args[0]);
   	client = args[0].equals("-c"); //Iperfer as Client
 	server = args[0].equals("-s"); //Iperfer as Server
 	cmdline[0] = args[0];
@@ -86,7 +85,6 @@ class IperferServer {
 	double bandwidth = (count*8/1000)/(timeelapsed/1000000000);
 	System.out.println("Received data = "+count+" KB ," +"Bandwidth = "+ bandwidth+" Mbps");
 	
-	//System.out.println("number of packets received"+count);
 	in.close(); 
 	clientSocket.close(); 
 	serverSocket.close(); 
@@ -97,7 +95,6 @@ class IperferServer {
 
 class IperferClient {
     public void iperferClient(String serverHostname, int serverPort, double time) throws IOException {
-	//String serverHostname = new String ("127.0.0.1");
 	char[] data;
 	data = new char[1000];
 	int i;
@@ -110,8 +107,7 @@ class IperferClient {
         BufferedReader in = null;
 	
         try {
-            // echoSocket = new Socket("taranis", 7);
-            echoSocket = new Socket(serverHostname, serverPort);
+	    echoSocket = new Socket(serverHostname, serverPort);
             out = new PrintWriter(echoSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(
 							  echoSocket.getInputStream()));
@@ -134,10 +130,7 @@ class IperferClient {
 	//System.out.println("packets sent: "+packetssent);
 	double bandwidth = (packetssent*8/1000)/time;
 	System.out.println("Sent Data = "+packetssent+" KB ," +"Bandwidth = "+ bandwidth+" Mbps");
-	//while ((userInput = stdIn.readLine()) != null) {
-	//  System.out.println("echo: " + in.readLine());
-	//System.out.print ("input: ");
-        in.close();	
+	in.close();	
 	out.close();
 	echoSocket.close();
     }
