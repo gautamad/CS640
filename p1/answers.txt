@@ -1,0 +1,76 @@
+Q2)
+RTT:
+----
+Predicted RTT Latency between H1 and H4  = L1 + L2 + L3 = 160 ms 
+
+Observed Value:
+Average RTT = 161.88 ms
+
+
+Throughput:
+-----------
+Predicted throughput = 20 Mbps (Slowest of all the links (S1->S2))
+
+Observed Avg throughput = (22.22 + 17.66)/2 = 19.94 Mbps
+
+Q3)
+RTT with two hosts:
+-------------------
+Predicted:
+Latency = 160 ms
+
+Observed:
+latency = 163.11 ms
+
+The source and the destination switches are the same. The connection between all pairs of hosts also uses the same links. So this should not affect latency. 
+
+Throughput with two hosts:
+-------------------------
+Predicted = 10 Mbps between h1 and h4
+	    10 Mbps between h7 and h9
+
+It gets equally divided
+
+Observed = 10.015 Mbps between h1 and h4
+	   10.84 Mbps between h7 and h9
+
+
+
+RTT with three hosts:
+--------------------
+Predicted = 160 ms
+
+Observed = 161 ms
+
+The source and the destination switches are the same. The connection between all pairs of hosts also uses the same links. So this should not affect latency. 
+
+Throughput wiht three hosts:
+--------------------------
+Predicted = 20/3 Mbps between h1->h4 , h7->h9 and h8->h10  each
+
+Observed =  6.61 Mbps between h1 and h4
+            5.32 Mbps between h8 and h10
+	    10.24 Mbps between h7 and h9.
+
+Since the connection between h7 and h9 was establised first, it had a higher bandwidth compared to the other two.
+Overall the avg bandwidth was 7.39 Mbps for each of the three connections.
+
+
+Q4)
+RTT:
+---------
+Predicted = 160 ms
+
+Observed = 161 ms
+
+Latency is not affected in this case as the delay depends on only propogation delay because of negilible queueing delay since ping sends small packets which does not cause a delay at the switch 
+
+Throughput:
+----------
+Predicted = 20 Mbps between h1 and h4 (since the slowest link is L1)
+	    20 Mbps between h5 and h6 (L2 has 40 Mbps. However it is shared between the two connections=>40/2 Mbps)
+
+Observed = 19.14 Mbps between h1 and h4, average	
+	   21.14 Mbps between h5 and h6, average
+	   
+  		

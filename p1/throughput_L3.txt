@@ -1,0 +1,5 @@
+Client:
+throughput = 32.53 Mbps
+
+Server:
+throughput = 28.39 Mbps
